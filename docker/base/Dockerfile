@@ -1,0 +1,3 @@
+FROM php:7.1-cli
+STOPSIGNAL SIGKILL
+WORKDIR /opt
