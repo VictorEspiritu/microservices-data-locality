@@ -48,3 +48,11 @@ services:
         command: php src/NetworkCache/client.php
         depends_on:
             - rest_server
+
+    rest_client_with_client_cache:
+        image: microservices-for-everyone/data_locality_base
+        volumes:
+            - ./:/opt
+        command: php src/ClientCache/client.php
+        depends_on:
+            - rest_server_backend
