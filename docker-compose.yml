@@ -1,17 +1,50 @@
 version: '3'
 
 services:
-    api_endpoints_server:
+    graphql_server:
         image: microservices-for-everyone/data_locality_base
         build: docker/base
         volumes:
             - ./:/opt
         ports:
             - 8080:80
-        command: php -S 0.0.0.0:80 -t src/ApiEndpoints/server/
+        command: php -S 0.0.0.0:80 src/ApiEndpoints/GraphQL/server.php
 
-    api_endpoints_client:
+    graphql_client:
         image: microservices-for-everyone/data_locality_base
         volumes:
             - ./:/opt
-        command: php src/ApiEndpoints/client.php
+        command: php src/ApiEndpoints/GraphQL/client.php
+        depends_on:
+            - graphql_server
+
+    rest_server_backend:
+        image: microservices-for-everyone/data_locality_base
+        volumes:
+            - ./:/opt
+        ports:
+            - 8081:80
+        command: php -S 0.0.0.0:80 src/ApiEndpoints/REST/server.php
+
+    rest_client:
+        image: microservices-for-everyone/data_locality_base
+        volumes:
+            - ./:/opt
+        command: php src/ApiEndpoints/REST/client.php
+        depends_on:
+            - rest_server_backend
+
+    rest_server:
+        build: docker/varnish/
+        ports:
+            - 8082:80
+        depends_on:
+            - rest_server_backend
+
+    rest_client_with_network_cache:
+        image: microservices-for-everyone/data_locality_base
+        volumes:
+            - ./:/opt
+        command: php src/NetworkCache/client.php
+        depends_on:
+            - rest_server

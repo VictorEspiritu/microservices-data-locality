@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace ApiEndpoints\GraphQL;
 
-use ApiEndpoints\Domain\Model\MeetupRepository;
+use Common\Domain\Model\MeetupRepository;
 
 final class Types
 {

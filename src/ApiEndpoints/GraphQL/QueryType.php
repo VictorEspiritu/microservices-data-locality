@@ -3,8 +3,8 @@ declare(strict_types = 1);
 
 namespace ApiEndpoints\GraphQL;
 
-use ApiEndpoints\Domain\Model\Meetup;
-use ApiEndpoints\Domain\Model\MeetupRepository;
+use Common\Domain\Model\Meetup;
+use Common\Domain\Model\MeetupRepository;
 use GraphQL\Type\Definition\ListOfType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -13,7 +13,7 @@ use GraphQL\Type\Definition\Type;
 final class QueryType extends ObjectType
 {
     /**
-     * @var MeetupRepository
+     * @var \Common\Domain\Model\MeetupRepository
      */
     private $meetupRepository;
 

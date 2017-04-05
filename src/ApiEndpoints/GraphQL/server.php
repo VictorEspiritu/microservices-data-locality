@@ -2,8 +2,8 @@
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
-use ApiEndpoints\Domain\Model\Meetup;
-use ApiEndpoints\Domain\Model\MeetupRepository;
+use Common\Domain\Model\Meetup;
+use Common\Domain\Model\MeetupRepository;
 use ApiEndpoints\GraphQL\Context;
 use ApiEndpoints\GraphQL\Types;
 use GraphQL\Schema;
@@ -33,4 +33,4 @@ $query = $_GET['query'];
 $result = GraphQL::execute($schema, $query, null, $context);
 
 header('Content-Type: application/json', true, 200);
-echo json_encode($result, JSON_PRETTY_PRINT);
+echo json_encode($result);

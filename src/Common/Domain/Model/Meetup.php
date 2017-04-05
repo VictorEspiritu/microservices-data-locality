@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace ApiEndpoints\Domain\Model;
+namespace Common\Domain\Model;
 
 final class Meetup
 {

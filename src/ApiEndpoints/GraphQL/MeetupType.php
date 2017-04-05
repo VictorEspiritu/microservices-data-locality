@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace ApiEndpoints\GraphQL;
 
-use ApiEndpoints\Domain\Model\Meetup;
+use Common\Domain\Model\Meetup;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
