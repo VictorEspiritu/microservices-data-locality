@@ -4,11 +4,16 @@
     "guzzlehttp/guzzle": "^6.2",
     "symfony/var-dumper": "^3.2",
     "kevinrob/guzzle-cache-middleware": "^2.0",
-    "doctrine/cache": "^1.6"
+    "doctrine/cache": "^1.6",
+    "bunny/bunny": "^0.2.4",
+    "ramsey/uuid": "^3.6"
   },
   "autoload": {
     "psr-4": {
       "": "src/"
-    }
+    },
+    "files": [
+      "src/Common/Serialization/functions.php"
+    ]
   }
 }

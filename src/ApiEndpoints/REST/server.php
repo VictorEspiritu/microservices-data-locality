@@ -15,7 +15,7 @@ $upcomingMeetups = $meetupRepository->upcomingMeetups($now);
 $jsonData = array_map(function (Meetup $meetup) use ($now) {
     return [
         'id' => $meetup->id(),
-        'scheduledDate' => $meetup->scheduledDate()->format('Y-m-d H:i'),
+        'provisionalDate' => $meetup->scheduledDate()->format('Y-m-d H:i'),
         'isUpcoming' => $meetup->isUpcoming($now)
     ];
 }, $upcomingMeetups);

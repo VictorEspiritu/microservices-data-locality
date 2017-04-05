@@ -56,3 +56,29 @@ services:
         command: php src/ClientCache/client.php
         depends_on:
             - rest_server_backend
+
+    rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+            # management UI:
+            - 15672:15672
+
+    redis:
+        image: redis:3.2
+
+    domain_events_producer:
+        image: microservices-for-everyone/data_locality_base
+        volumes:
+            - ./:/opt
+        command: php src/DomainEvents/producer.php
+        depends_on:
+            - rabbitmq
+
+    domain_events_consumer:
+        image: microservices-for-everyone/data_locality_base
+        volumes:
+            - ./:/opt
+        command: php src/DomainEvents/consumer.php
+        depends_on:
+            - rabbitmq
+            - redis

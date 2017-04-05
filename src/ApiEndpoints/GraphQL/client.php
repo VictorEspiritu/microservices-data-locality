@@ -11,7 +11,7 @@ $query = <<<EOD
 {
     meetups(upcoming: true) {
         id
-        scheduledDate
+        newDate
         isUpcoming
     }
 }

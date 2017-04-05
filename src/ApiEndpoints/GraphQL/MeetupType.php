@@ -20,7 +20,7 @@ final class MeetupType extends ObjectType
                             return $meetup->id();
                         }
                     ],
-                    'scheduledDate' => [
+                    'provisionalDate' => [
                         'type' => Type::string(),
                         'resolve' => function (Meetup $meetup) {
                             return $meetup->scheduledDate()->format('Y-m-d H:i');
