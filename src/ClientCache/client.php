@@ -14,9 +14,9 @@ $stack->push(new CacheMiddleware(new PrivateCacheStrategy(
     new DoctrineCacheStorage(
         new FilesystemCache(__DIR__ . '/cache')
     )
-)), 'shared-cache');
+)), 'private-cache');
 $httpClient = new Client(['handler' => $stack]);
 
-$response = $httpClient->get('http://rest_server_backend/');
+$response = $httpClient->get('http://rest_server_backend/upcoming-meetups');
 dump($response->getHeader('Cache-Control'));
 dump($response->getHeader('X-Kevinrob-Cache'));

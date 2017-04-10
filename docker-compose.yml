@@ -35,7 +35,9 @@ services:
             - rest_server_backend
 
     rest_server:
-        build: docker/varnish/
+        image: million12/varnish
+        volumes:
+            - ./varnish/config/default.vcl:/etc/varnish/default.vcl
         ports:
             - 8082:80
         depends_on:

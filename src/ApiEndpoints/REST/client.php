@@ -7,7 +7,7 @@ require __DIR__ . '/../../../vendor/autoload.php';
 
 $httpClient = new Client();
 
-$response = $httpClient->get('http://rest_server_backend/');
+$response = $httpClient->get('http://rest_server_backend/upcoming-meetups');
 
 $rawJson = $response->getBody();
 $results = json_decode($rawJson);
