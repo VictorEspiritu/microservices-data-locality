@@ -9,6 +9,8 @@ use ApiEndpoints\GraphQL\Types;
 use GraphQL\Schema;
 use GraphQL\GraphQL;
 use GraphQL\Type\Definition\Config;
+use GraphQL\Utils\SchemaPrinter;
+use function Common\Serialization\json_encode;
 
 Config::enableValidation();
 
@@ -23,12 +25,15 @@ $meetupRepository->add(new Meetup('2', new \DateTimeImmutable('+2 days')));
 $schema = new Schema([
     'query' => Types::query($meetupRepository)
 ]);
+error_log('GraphQL schema: ' . SchemaPrinter::doPrint($schema));
 
 if (!isset($_GET['query'])) {
     throw new \RuntimeException('Provide a "query" query parameter');
 }
 
 $query = $_GET['query'];
+
+error_log('GraphQL query received: ' . $query);
 
 $result = GraphQL::execute($schema, $query, null, $context);
 

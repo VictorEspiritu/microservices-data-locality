@@ -26,7 +26,7 @@ final class QueryType extends ObjectType
             'fields' => [
                 'meetups' => [
                     'type' => new ListOfType(Types::meetup()),
-                    'description' => 'Upcoming ',
+                    'description' => 'Meetups',
                     'args' => [
                         'upcoming' => Type::boolean()
                     ],

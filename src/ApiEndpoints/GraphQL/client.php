@@ -11,7 +11,7 @@ $query = <<<EOD
 {
     meetups(upcoming: true) {
         id
-        newDate
+        scheduledDate
         isUpcoming
     }
 }
@@ -23,10 +23,12 @@ $response = $httpClient->get('http://graphql_server/', [
     ]
 ]);
 
-$rawJson = $response->getBody();
+$rawJson = (string)$response->getBody();
+echo "Received response:\n";
+echo $rawJson . "\n";
 $results = json_decode($rawJson);
 
-$meetupDtos = array_map(function($meetupData) {
+$meetupDtos = array_map(function ($meetupData) {
     return Meetup::fromData($meetupData);
 }, $results->data->meetups);
 
