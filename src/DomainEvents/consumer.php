@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Bunny\Channel;
 use Bunny\Client;
 use Bunny\Message;
+use function Common\Serialization\json_encode;
 
 /** @var Client $client */
 $client = require __DIR__ . '/bootstrap.php';
@@ -31,7 +32,7 @@ $channel->run(
                 $redis->hSet(
                     'meetups',
                     $eventData->id,
-                    serialize($projection)
+                    json_encode($projection)
                 );
 
                 break;
@@ -40,13 +41,19 @@ $channel->run(
                 $eventData = json_decode($message->content);
 
                 // fetch the projection we currently have
-                $projection = unserialize($redis->hGet('meetups', $eventData->id));
+                $projection = json_decode(
+                    $redis->hGet('meetups', $eventData->id)
+                );
 
                 // update the projection based on the new event data
                 $projection->scheduledDate = $eventData->newDate;
 
                 // store the updated projection
-                $redis->hSet('meetups', $eventData->id, serialize($projection));
+                $redis->hSet(
+                    'meetups',
+                    $eventData->id,
+                    json_encode($projection)
+                );
 
                 break;
 
@@ -54,7 +61,7 @@ $channel->run(
                 error_log('Unknown message type');
         }
 
-        dump(array_map('unserialize', $redis->hGetAll('meetups')));
+        dump(array_map('json_decode', $redis->hGetAll('meetups')));
 
         $channel->ack($message); // Acknowledge message
     },
