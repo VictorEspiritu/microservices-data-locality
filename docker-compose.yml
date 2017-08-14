@@ -2,7 +2,7 @@ version: '3'
 
 services:
     graphql_server:
-        image: microservices-for-everyone/data_locality_base
+        image: microservicesforeveryone/data_locality_base
         build: docker/base
         volumes:
             - ./:/opt
@@ -11,7 +11,7 @@ services:
         command: php -S 0.0.0.0:80 src/ApiEndpoints/GraphQL/server.php
 
     graphql_client:
-        image: microservices-for-everyone/data_locality_base
+        image: microservicesforeveryone/data_locality_base
         volumes:
             - ./:/opt
         command: php src/ApiEndpoints/GraphQL/client.php
@@ -19,7 +19,7 @@ services:
             - graphql_server
 
     rest_server_backend:
-        image: microservices-for-everyone/data_locality_base
+        image: microservicesforeveryone/data_locality_base
         volumes:
             - ./:/opt
         ports:
@@ -27,7 +27,7 @@ services:
         command: php -S 0.0.0.0:80 src/ApiEndpoints/REST/server.php
 
     rest_client:
-        image: microservices-for-everyone/data_locality_base
+        image: microservicesforeveryone/data_locality_base
         volumes:
             - ./:/opt
         command: php src/ApiEndpoints/REST/client.php
@@ -44,7 +44,7 @@ services:
             - rest_server_backend
 
     rest_client_with_network_cache:
-        image: microservices-for-everyone/data_locality_base
+        image: microservicesforeveryone/data_locality_base
         volumes:
             - ./:/opt
         command: php src/NetworkCache/client.php
@@ -52,7 +52,7 @@ services:
             - rest_server
 
     rest_client_with_client_cache:
-        image: microservices-for-everyone/data_locality_base
+        image: microservicesforeveryone/data_locality_base
         volumes:
             - ./:/opt
         command: php src/ClientCache/client.php
@@ -69,7 +69,7 @@ services:
         image: redis:3.2
 
     domain_events_producer:
-        image: microservices-for-everyone/data_locality_base
+        image: microservicesforeveryone/data_locality_base
         volumes:
             - ./:/opt
         command: php src/DomainEvents/producer.php
@@ -77,7 +77,7 @@ services:
             - rabbitmq
 
     domain_events_consumer:
-        image: microservices-for-everyone/data_locality_base
+        image: microservicesforeveryone/data_locality_base
         volumes:
             - ./:/opt
         command: php src/DomainEvents/consumer.php
